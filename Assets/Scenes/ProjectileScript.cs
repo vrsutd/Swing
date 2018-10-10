@@ -14,20 +14,24 @@ public class ProjectileScript : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        projectileRigidBody.velocity = transform.forward * projectileVelocity;
-
-        var projectileTargetRotation = Quaternion.LookRotation(projectileTarget.position - transform.position);
-
-        projectileRigidBody.MoveRotation(Quaternion.RotateTowards(transform.rotation, projectileTargetRotation, turn));
+        
     }
 
     // Use this for initialization
     void Start () {
-        Destroy(this, 10);
-	}
+        projectileTarget = GameObject.FindGameObjectWithTag("Follow").transform;
+        StartCoroutine(Life());
+
+        projectileRigidBody.velocity = (projectileTarget.transform.position - transform.position).normalized * projectileVelocity;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+    IEnumerator Life()
+    {
+        yield return new WaitForSeconds(8);
+        Destroy(this.gameObject);
+    }
 }
