@@ -10,6 +10,8 @@ public class ProjectileScript : MonoBehaviour {
     public float turn;
     public float projectileVelocity;
 
+
+
     private void FixedUpdate()
     {
         projectileRigidBody.velocity = transform.forward * projectileVelocity;
@@ -21,7 +23,7 @@ public class ProjectileScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        Destroy(this, 10);
 	}
 	
 	// Update is called once per frame
